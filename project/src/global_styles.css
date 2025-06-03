@@ -1,0 +1,223 @@
+/* Global styles for Warhammer Game Tracker */
+
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+:root {
+  --primary: #8b0000;  /* Deep red */
+  --secondary: #2a2a2a; /* Dark grey */
+  --accent: #d4af37;   /* Gold */
+  --success: #357a38;  /* Dark green */
+  --warning: #ff9800;  /* Orange */
+  --danger: #d32f2f;   /* Red */
+  --light: #f5f5f5;    /* Light grey */
+  --dark: #1a1a1a;     /* Almost black */
+  --parchment: #f0e6d2; /* Parchment color */
+  --metal: #5a5a5a;    /* Metal grey */
+}
+
+body {
+  background-image: var(--dark);
+  color: var(--light);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-image: url('./../public/images/AquilaBlack.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+.container {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* Gaming theme elements */
+.card {
+  background-color: rgba(42, 42, 42, 0.9);
+  border: 1px solid var(--accent);
+  border-radius: 0.5rem;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+  margin-bottom: 1.5rem;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+}
+
+.card-header {
+  background-color: rgba(139, 0, 0, 0.8);
+  color: var(--light);
+  border-bottom: 1px solid var(--accent);
+  font-weight: bold;
+  padding: 0.75rem 1.25rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-primary:hover {
+  background-color: #6b0000;
+  border-color: #6b0000;
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+  border-color: var(--accent);
+  color: var(--light);
+}
+
+.btn-secondary:hover {
+  background-color: #3a3a3a;
+  border-color: var(--accent);
+}
+
+.btn-accent {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--dark);
+}
+
+.btn-accent:hover {
+  background-color: #c19b2c;
+  border-color: #c19b2c;
+}
+
+/* Gaming themed inputs */
+.form-control {
+  background-color: rgba(42, 42, 42, 0.8);
+  border: 1px solid var(--metal);
+  color: var(--light);
+}
+
+.form-control:focus {
+  background-color: rgba(42, 42, 42, 0.9);
+  color: var(--light);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25);
+}
+
+/* Title styles */
+.game-title {
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
+  color: var(--accent);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+}
+
+/* Faction badges */
+.faction-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-weight: bold;
+  display: inline-block;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid var(--accent);
+}
+
+/* Points display */
+.points-display {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: rgba(26, 26, 26, 0.8);
+  border: 1px solid var(--accent);
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Animations */
+@keyframes glow {
+  0% { box-shadow: 0 0 5px var(--accent); }
+  50% { box-shadow: 0 0 20px var(--accent); }
+  100% { box-shadow: 0 0 5px var(--accent); }
+}
+
+.glow-effect {
+  animation: glow 2s infinite;
+}
+
+/* Loading animation */
+.loading-skull {
+  text-align: center;
+  padding: 2rem;
+  font-size: 3rem;
+  color: var(--accent);
+}
+
+.loading-skull i {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.7; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Round counter styles */
+.round-counter {
+  background-color: rgba(139, 0, 0, 0.8);
+  color: var(--light);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0 auto 1rem;
+}
+
+/* Mission cards */
+.mission-card {
+  background-color: rgba(42, 42, 42, 0.9);
+  border: 1px solid var(--accent);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.mission-card.active {
+  box-shadow: 0 0 15px var(--accent);
+}
+
+.mission-card-title {
+  color: var(--accent);
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.mission-card-description {
+  color: var(--light);
+  font-size: 0.9rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card {
+    margin-bottom: 1rem;
+  }
+  
+  .card-body {
+    padding: 1rem;
+  }
+  
+  .game-title {
+    font-size: 1.5rem;
+  }
+}
