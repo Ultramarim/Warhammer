@@ -28,24 +28,7 @@ export class FactionService {
     [Faction.CHAOS_KNIGHTS]: 'fa-horse',
     [Faction.DAEMONS]: 'fa-ghost',
     
-    // Age of Sigmar Factions
-    [Faction.STORMCAST_ETERNALS]: 'fa-bolt',
-    [Faction.NIGHTHAUNT]: 'fa-ghost',
-    [Faction.SERAPHON]: 'fa-dragon',
-    [Faction.SLAVES_TO_DARKNESS]: 'fa-spaghetti-monster-flying',
-    [Faction.DAUGHTERS_OF_KHAINE]: 'fa-person-dress',
-    [Faction.KHARADRON_OVERLORDS]: 'fa-ship',
-    [Faction.SYLVANETH]: 'fa-tree',
-    [Faction.SKAVEN]: 'fa-rat',
-    [Faction.BEASTS_OF_CHAOS]: 'fa-paw',
-    [Faction.FLESH_EATER_COURTS]: 'fa-crown',
-    [Faction.IDONETH_DEEPKIN]: 'fa-water',
-    [Faction.LUMINETH_REALM_LORDS]: 'fa-mountain-sun',
-    [Faction.SOULBLIGHT_GRAVELORDS]: 'fa-bone',
-    [Faction.OSSIARCH_BONEREAPERS]: 'fa-skull-crossbones',
-    [Faction.CITIES_OF_SIGMAR]: 'fa-city',
-    [Faction.ORRUK_WARCLANS]: 'fa-hammer',
-    [Faction.GLOOMSPITE_GITZ]: 'fa-hat-wizard'
+    
   };
 
   private factionColors: Record<Faction, string> = {
@@ -71,24 +54,7 @@ export class FactionService {
     [Faction.CHAOS_KNIGHTS]: '#8B4513',
     [Faction.DAEMONS]: '#FF0000',
     
-    // Age of Sigmar Factions
-    [Faction.STORMCAST_ETERNALS]: '#FFD700',
-    [Faction.NIGHTHAUNT]: '#48D1CC',
-    [Faction.SERAPHON]: '#1E90FF',
-    [Faction.SLAVES_TO_DARKNESS]: '#696969',
-    [Faction.DAUGHTERS_OF_KHAINE]: '#DC143C',
-    [Faction.KHARADRON_OVERLORDS]: '#B87333',
-    [Faction.SYLVANETH]: '#228B22',
-    [Faction.SKAVEN]: '#A52A2A',
-    [Faction.BEASTS_OF_CHAOS]: '#8B4513',
-    [Faction.FLESH_EATER_COURTS]: '#8B0000',
-    [Faction.IDONETH_DEEPKIN]: '#00BFFF',
-    [Faction.LUMINETH_REALM_LORDS]: '#FFFFFF',
-    [Faction.SOULBLIGHT_GRAVELORDS]: '#800000',
-    [Faction.OSSIARCH_BONEREAPERS]: '#F5F5DC',
-    [Faction.CITIES_OF_SIGMAR]: '#4682B4',
-    [Faction.ORRUK_WARCLANS]: '#006400',
-    [Faction.GLOOMSPITE_GITZ]: '#9ACD32'
+    
   };
 
   getFactions(): Faction[] {
@@ -122,23 +88,7 @@ export class FactionService {
 
   getAoSFactions(): Faction[] {
     return [
-      Faction.STORMCAST_ETERNALS,
-      Faction.NIGHTHAUNT,
-      Faction.SERAPHON,
-      Faction.SLAVES_TO_DARKNESS,
-      Faction.DAUGHTERS_OF_KHAINE,
-      Faction.KHARADRON_OVERLORDS,
-      Faction.SYLVANETH,
-      Faction.SKAVEN,
-      Faction.BEASTS_OF_CHAOS,
-      Faction.FLESH_EATER_COURTS,
-      Faction.IDONETH_DEEPKIN,
-      Faction.LUMINETH_REALM_LORDS,
-      Faction.SOULBLIGHT_GRAVELORDS,
-      Faction.OSSIARCH_BONEREAPERS,
-      Faction.CITIES_OF_SIGMAR,
-      Faction.ORRUK_WARCLANS,
-      Faction.GLOOMSPITE_GITZ
+     
     ];
   }
 

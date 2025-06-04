@@ -92,18 +92,58 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
                       (pointsUpdated)="updateSecondaryMissionPoints(player.id, $event)">
                     </app-mission-card>
                   </div>
-                  
-                  <div class="col-12" *ngIf="player.secondaryMissions.length < 3 && game.status === gameStatus.IN_PROGRESS">
-                    <button class="btn btn-outline-accent w-100 empty-state-text " (click)="showSelectMissionModal(player)">
-                      <i class="fas fa-plus me-2 empty-state-text"></i>Add Secondary Mission
-                    </button>
+
+
+                  @if(selectedMission) {
+    <div class="card bg-dark text-white border-accent">
+      <div class="card-header bg-accent text-dark">
+        <h5 class="card-title mb-0">{{ selectedMission.title }}</h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-dark text-white">
+          <strong>Description:</strong> {{ selectedMission.description }}
+        </li>
+        <li class="list-group-item bg-dark text-white">
+          <strong>Points:</strong> {{ selectedMission.points }}
+        </li>
+      
+      </ul>
+      <div class="card-footer">
+        <button class="btn btn-accent" (click)="confirmSelection()">
+          Complete mission
+        </button>
+      </div>
+    </div>
+  }
+
+                    <div class="col-12" >
+                
+                    <div class="dropdown mb-3">
+                      <button class="btn btn-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        add secondary mission
+                      </button>
+                      <ul class dropdown-menu bg-dark >
+                      @for(mision of this.misions; track mision._id){
+    
+          <li >
+        <a class="dropdown-item text-white" 
+              (click)="selectMission(mision)">
+              {{ mision.title }}
+            </a>
+          </li>
+  }
+          </ul>
+        </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+
+
+
       
       <!-- Battle Controls and Log -->
       <div class="row">
@@ -275,6 +315,30 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     .empty-state-text{
     color: white;
     }
+
+    dropdown-menu {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.dropdown-item {
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+
+.card {
+  border-width: 2px;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+.list-group-item {
+  border-color: rgba(212, 175, 55, 0.3);
+}
   `]
 })
 export class GameDashboardComponent implements OnInit, OnDestroy {
@@ -288,6 +352,7 @@ export class GameDashboardComponent implements OnInit, OnDestroy {
   selectedPlayer: Player | null = null;
   availableSecondaryMissions: Mission[] = [];
   misions: Table[] = [];
+    selectedMission: any = null;
   
   // For log entries
   newLogEntry = '';
@@ -318,6 +383,21 @@ export class GameDashboardComponent implements OnInit, OnDestroy {
     }
    )
   }
+
+  selectMission(mission: any) {
+    this.selectedMission = mission;
+  }
+
+  
+
+  confirmSelection() {
+    if (this.selectedMission) {
+      // Add your logic to save the selected mission
+      console.log('Mission selected:', this.selectedMission);
+      // Add to player's missions, etc.
+    }
+  }
+
   
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {

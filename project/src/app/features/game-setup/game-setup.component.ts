@@ -89,7 +89,7 @@ import { Faction } from '../../core/models/game.model';
                     </div>
                     
                     <div class="faction-group">
-                      <h5 class="faction-category">Age of Sigmar</h5>
+                 
                       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2">
                         <div class="col" *ngFor="let faction of aosFactions">
                           <button
@@ -167,7 +167,7 @@ import { Faction } from '../../core/models/game.model';
                     </div>
                     
                     <div class="faction-group">
-                      <h5 class="faction-category">Age of Sigmar</h5>
+                    
                       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2">
                         <div class="col" *ngFor="let faction of aosFactions">
                           <button

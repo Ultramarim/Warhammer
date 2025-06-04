@@ -20,6 +20,7 @@ export interface Player {
   victoryPoints: number;
   units: Unit[];
   secondaryMissions: SecondaryMission[];
+  slectedMision?: any;
 }
 
 export interface Unit {
@@ -102,22 +103,5 @@ export enum Faction {
   CHAOS_KNIGHTS = 'Chaos Knights',
   DAEMONS = 'Chaos Daemons',
   
-  // Age of Sigmar Factions
-  STORMCAST_ETERNALS = 'Stormcast Eternals',
-  NIGHTHAUNT = 'Nighthaunt',
-  SERAPHON = 'Seraphon',
-  SLAVES_TO_DARKNESS = 'Slaves to Darkness',
-  DAUGHTERS_OF_KHAINE = 'Daughters of Khaine',
-  KHARADRON_OVERLORDS = 'Kharadron Overlords',
-  SYLVANETH = 'Sylvaneth',
-  SKAVEN = 'Skaven',
-  BEASTS_OF_CHAOS = 'Beasts of Chaos',
-  FLESH_EATER_COURTS = 'Flesh-eater Courts',
-  IDONETH_DEEPKIN = 'Idoneth Deepkin',
-  LUMINETH_REALM_LORDS = 'Lumineth Realm-lords',
-  SOULBLIGHT_GRAVELORDS = 'Soulblight Gravelords',
-  OSSIARCH_BONEREAPERS = 'Ossiarch Bonereapers',
-  CITIES_OF_SIGMAR = 'Cities of Sigmar',
-  ORRUK_WARCLANS = 'Orruk Warclans',
-  GLOOMSPITE_GITZ = 'Gloomspite Gitz'
+  
 }
