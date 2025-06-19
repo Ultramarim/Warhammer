@@ -293,6 +293,9 @@ export class GameService {
       type: LogEntryType.CUSTOM,
       description
     };
+
+    
+    
     
     game.battleLog = [...game.battleLog, logEntry];
     game.updatedAt = new Date();
@@ -386,4 +389,6 @@ export class GameService {
       }
     ];
   }
+
+
 }

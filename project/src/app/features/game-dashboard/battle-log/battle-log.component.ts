@@ -123,6 +123,7 @@ export class BattleLogComponent {
     );
   }
   
+  
   getPlayerName(playerId: number): string {
     const player = this.players.find(p => p.id === playerId);
     return player ? player.name : 'Unknown';

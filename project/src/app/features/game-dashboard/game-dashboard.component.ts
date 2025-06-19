@@ -5,7 +5,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { GameService } from '../../core/services/game.service';
 import { FactionService } from '../../core/services/faction.service';
-import { Game, Player, Mission, SecondaryMission, Faction, GameStatus } from '../../core/models/game.model';
+import { Game, Player, Mission, SecondaryMission, Faction, GameStatus, LogEntryType, LogEntry } from '../../core/models/game.model';
 import { MissionCardComponent } from './mission-card/mission-card.component';
 import { PointTrackerComponent } from './point-tracker/point-tracker.component';
 import { BattleLogComponent } from './battle-log/battle-log.component';
@@ -82,65 +82,52 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
                 <h5 class="mb-3">Secondary Missions</h5>
                 <div class="row">
                   <div class="col-md-6 mb-3" *ngFor="let secondaryMission of player.secondaryMissions">
-                    <app-mission-card 
-                      [mission]="getMissionById(secondaryMission.missionId)"
-                      [currentPoints]="secondaryMission.currentPoints"
-                      [maxPoints]="secondaryMission.maxPoints"
-                      [player]="player"
-                      [gameId]="game.id"
-                      [gameStatus]="game.status"
-                      (pointsUpdated)="updateSecondaryMissionPoints(player.id, $event)">
-                    </app-mission-card>
+                   
                   </div>
 
 
-                  @if(selectedMission) {
-    <div class="card bg-dark text-white border-accent">
+  @if(player.slectedMision) {
+   <div class="card bg-dark text-white border-accent">
       <div class="card-header bg-accent text-dark">
-        <h5 class="card-title mb-0">{{ selectedMission.title }}</h5>
+        <h5 class="card-title mb-0">{{ player.slectedMision.title }}</h5>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item bg-dark text-white">
-          <strong>Description:</strong> {{ selectedMission.description }}
+          <strong>Description:</strong> {{ player.slectedMision.description }}
         </li>
         <li class="list-group-item bg-dark text-white">
-          <strong>Points:</strong> {{ selectedMission.points }}
+          <strong>Points:</strong> {{ player.slectedMision.points }}
         </li>
       
       </ul>
       <div class="card-footer">
-        <button class="btn btn-accent" (click)="confirmSelection()">
+        <button class="btn btn-accent" (click)="confirmSelection(player)">
           Complete mission
         </button>
       </div>
     </div>
   }
 
-                    <div class="col-12" >
-                
-                    <div class="dropdown mb-3">
-                      <button class="btn btn-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        add secondary mission
-                      </button>
-                      <ul class dropdown-menu bg-dark >
-                      @for(mision of this.misions; track mision._id){
-    
-          <li >
+   <div class="col-12" >
+     <div class="dropdown mb-3">
+      <ul class dropdown-menu bg-dark >
+       @for(mision of this.misions; track mision._id){
+       <li >
         <a class="dropdown-item text-white" 
-              (click)="selectMission(mision)">
+              (click)="selectMission(player, mision)">
               {{ mision.title }}
             </a>
           </li>
   }
           </ul>
         </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+       </div>
+     </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
 
 
 
@@ -353,6 +340,7 @@ export class GameDashboardComponent implements OnInit, OnDestroy {
   availableSecondaryMissions: Mission[] = [];
   misions: Table[] = [];
     selectedMission: any = null;
+    players: Player[] = [];
   
   // For log entries
   newLogEntry = '';
@@ -383,18 +371,29 @@ export class GameDashboardComponent implements OnInit, OnDestroy {
     }
    )
   }
-
-  selectMission(mission: any) {
-    this.selectedMission = mission;
-  }
-
   
 
-  confirmSelection() {
-    if (this.selectedMission) {
-      // Add your logic to save the selected mission
-      console.log('Mission selected:', this.selectedMission);
-      // Add to player's missions, etc.
+  selectMission( player: Player, mission: any) {
+    if (player.secondaryMissions.length < 3) {
+      player.slectedMision = mission;
+    }
+  }
+
+
+  confirmSelection(player: Player) {
+    if (player.slectedMision) {
+        player.secondaryMissions.push({
+          ...player.slectedMision,
+          completedAt: new Date()
+        });
+
+      
+
+        player.victoryPoints += (player.slectedMision.points || 0) ||player.slectedMision.maxPoints;
+
+         player.slectedMision = null;
+ 
+     
     }
   }
 
