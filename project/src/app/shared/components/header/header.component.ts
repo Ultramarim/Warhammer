@@ -37,6 +37,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
               <li class="nav-item">
                 <a class="nav-link" routerLink="/history" routerLinkActive="active">Game History</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/missions" routerLinkActive="active">Create a mission</a>
+              </li>
             </ul>
           </div>
         </nav>

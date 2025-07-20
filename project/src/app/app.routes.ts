@@ -18,6 +18,10 @@ export const routes: Routes = [
     loadComponent: () => import('./features/game-history/game-history.component').then(m => m.GameHistoryComponent)
   },
   {
+    path: 'missions',
+    loadComponent: () => import('./features/missions/create-misions.component').then(m => m.MissionComponent)
+  },
+  {
     path: '**',
     redirectTo: ''
   }
