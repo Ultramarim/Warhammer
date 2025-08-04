@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, inject, Inject } from '@angular/core';
+import { Component, OnInit, Input, inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Table } from '../../core/common/mision';
 import { ApiMisionesService } from '../../core/services/misions.service';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-missions',
@@ -26,13 +26,16 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
     </div>
 
     <h3>Description</h3>
+
     <div class="form-foating mb-3">
       <input formControlName="description"
       type="text" class="form-control"
       id="description"
       placeholder="Description">
     </div>
+
     <h3>Points</h3>
+
     <div class="form-floating mb-3">
       <input formControlName="points"
       type="number" class="form-control"
@@ -61,14 +64,15 @@ export class MissionComponent implements OnInit {
   private readonly missionService: ApiMisionesService = inject(ApiMisionesService);
 
   private readonly formBuilder: FormBuilder = inject(FormBuilder);
+
   formMission: FormGroup = this.formBuilder.group({
-    title: [''],
-    description: [''],
-    points: [0]
+    title: ['', Validators.required],
+    description: ['', Validators.required],
+    points: [0, Validators.required]
   });
 
   get title(): any{
-    return this.formMission.get('tutle');
+    return this.formMission.get('title');
   }
   get description(): any{
     return this.formMission.get('description');
