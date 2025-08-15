@@ -17,7 +17,7 @@ export class ApiMisionesService {
   }
 
   updateMision( table: Table): Observable<any> {
-    return this.http.put(this.baseUrl+table._id, table);
+    return this.http.put(this.baseUrl+ '/' +table._id, table);
   }
 
   newMision(table: Table): Observable<any> {

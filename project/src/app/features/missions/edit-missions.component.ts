@@ -1,25 +1,34 @@
 import { Component, OnInit, Input, inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink  } from '@angular/router';
 import { Table } from '../../core/common/mision';
 import { ApiMisionesService } from '../../core/services/misions.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-
+import { Mission } from '../../core/models/game.model';
 
 @Component({
-  selector: 'app-missions',
+  selector: 'app-edit-missions',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive, ReactiveFormsModule],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule],
 
   template: `
 
+     
+    <h1>Edit mission</h1>
 
-     
-     
-    <h1>Create a mission</h1>
+
+
 
     <form [formGroup]="formMission" (ngSubmit)="onSubmit()">
+
+        <h3>Id</h3>
+      <div class="form-floating mb-3">
+        <input formControlName="_id" 
+        type="id" class="form-control"
+        id="id" 
+        placeholder="id">
+      </div>
+
       <h3>Title</h3>
     <div class="form-floating mb-3">
       <input formControlName="title"
@@ -28,8 +37,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
       placeholder="Title">
     </div>
 
-    <h3>Description</h3>
-
+      <h3>Description</h3>
     <div class="form-foating mb-3">
       <input formControlName="description"
       type="text" class="form-control"
@@ -37,8 +45,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
       placeholder="Description">
     </div>
 
-    <h3>Points</h3>
-
+      <h3>Points</h3>
     <div class="form-floating mb-3">
       <input formControlName="points"
       type="number" class="form-control"
@@ -46,13 +53,12 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
       placeholder="Points">
     </div>
 
+       <button type="submit" class="btn btn-primary btn-lg" (click)="onSubmit()">Edit mission</button>
     </form>
   
    
-   <button type="submit" class="btn btn-primary btn-lg" (click)="onSubmit()">Create mission</button>
 
 
-   
   
   `,
   styles: [`
@@ -62,19 +68,20 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     
   `]
 })
-export class MissionComponent implements OnInit {
+export class EditmissionComponent implements OnInit {
+    @Input() mission: Mission | undefined;
   @Input({required: true}) table!: Table;
   @Input({required: true}) editar!: boolean;
-   
 
   private readonly missionService: ApiMisionesService = inject(ApiMisionesService);
 
   private readonly formBuilder: FormBuilder = inject(FormBuilder);
 
   formMission: FormGroup = this.formBuilder.group({
+    _id: ['', Validators.required],
     title: ['', Validators.required],
     description: ['', Validators.required],
-    points: [0, Validators.required]
+    points: [0, Validators.required],
   });
 
   get title(): any{
@@ -102,27 +109,13 @@ export class MissionComponent implements OnInit {
           }
         }
       )
-    }else{
-    this.missionService.newMision(this.formMission.getRawValue()).subscribe(
-      {
-        next: value => {
-          console.log(value);
-        },
-        complete: () => {
-          console.log('Mission created');
-        },
-        error: err => {
-          console.error(err);
-        }
-      }
-    )
-  }
+    }
 }
 
   ngOnInit(): void {
    if (this.editar){
     this.formMission.setValue(this.table);
-   }else{
+   } else {
     this.formMission.reset();
    }
     };

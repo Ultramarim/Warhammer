@@ -40,6 +40,12 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
               <li class="nav-item">
                 <a class="nav-link" routerLink="/missions" routerLinkActive="active">Create a mission</a>
               </li>
+               <li class="nav-item">
+                <a class="nav-link" routerLink="/edit-missions" routerLinkActive="active">Edit missions</a>
+              </li>
+               <li class="nav-item">
+                <a class="nav-link" routerLink="/delete-missions" routerLinkActive="active">Delete missions</a>
+              </li>
             </ul>
           </div>
         </nav>

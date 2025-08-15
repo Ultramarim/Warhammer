@@ -341,6 +341,7 @@ export class GameDashboardComponent implements OnInit, OnDestroy {
   misions: Table[] = [];
     selectedMission: any = null;
     players: Player[] = [];
+    
   
   // For log entries
   newLogEntry = '';
