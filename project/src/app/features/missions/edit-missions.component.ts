@@ -4,7 +4,6 @@ import { RouterLink  } from '@angular/router';
 import { Table } from '../../core/common/mision';
 import { ApiMisionesService } from '../../core/services/misions.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Mission } from '../../core/models/game.model';
 
 @Component({
   selector: 'app-edit-missions',
@@ -16,10 +15,27 @@ import { Mission } from '../../core/models/game.model';
      
     <h1>Edit mission</h1>
 
+   <h2>{{table.length}}</h2>
 
+    <div class="container">
+    <div class="row">
+    @for (tables of table; track tables._id) {
+        <div class="row border rounder">
+            <div class="col-md-2 algin-self-center">
+                <div class="col-md-12">
+                <h3>{{tables.title}}</h3>
+            
+                </div>
+                <div class="pb-2"></div>
+            </div>
+        </div>
 
+    }
+  </div>
 
-    <form [formGroup]="formMission" (ngSubmit)="onSubmit()">
+  <div class="mb-2"></div>
+
+    <form (ngSubmit)="onSubmit()">
 
         <h3>Id</h3>
       <div class="form-floating mb-3">
@@ -53,9 +69,9 @@ import { Mission } from '../../core/models/game.model';
       placeholder="Points">
     </div>
 
-       <button type="submit" class="btn btn-primary btn-lg" (click)="onSubmit()">Edit mission</button>
+       
     </form>
-  
+  <button type="submit" class="btn btn-primary btn-lg" (click)="onSubmit()" >Edit mission</button>
    
 
 
@@ -68,35 +84,39 @@ import { Mission } from '../../core/models/game.model';
     
   `]
 })
-export class EditmissionComponent implements OnInit {
-    @Input() mission: Mission | undefined;
-  @Input({required: true}) table!: Table;
-  @Input({required: true}) editar!: boolean;
+export class EditmissionComponent  {
 
   private readonly missionService: ApiMisionesService = inject(ApiMisionesService);
 
-  private readonly formBuilder: FormBuilder = inject(FormBuilder);
+table: Table[] = [];  
 
-  formMission: FormGroup = this.formBuilder.group({
-    _id: ['', Validators.required],
-    title: ['', Validators.required],
-    description: ['', Validators.required],
-    points: [0, Validators.required],
-  });
+constructor(){
+  this.loadmissions();
+}
 
-  get title(): any{
-    return this.formMission.get('title');
-  }
-  get description(): any{
-    return this.formMission.get('description');
-  }
-  get points(): any{
-    return this.formMission.get('points');
-  }
+protected loadmissions(){
+  this.missionService.getMisions().subscribe(
+    {
+      next: value => {
+        console.log(value);
+        this.table = value;
+      },
+      error: err => {
+        console.error('Error to load missions', err)
+      },
+      complete: () => {
+        console.log('Missions loaded')
+      }
+    }
+  )
+}
 
+
+  
   onSubmit() {
-    if(this.editar){
-      this.missionService.updateMision(this.formMission.getRawValue()).subscribe(
+   
+    if (this.form && this.form.valid) {
+      this.missionService.updateMision(this.form.value).subscribe(
         {
           next: value => {
             console.log(value);
@@ -108,17 +128,14 @@ export class EditmissionComponent implements OnInit {
             console.error(err);
           }
         }
-      )
+      );
     }
-}
-
-  ngOnInit(): void {
-   if (this.editar){
-    this.formMission.setValue(this.table);
-   } else {
-    this.formMission.reset();
-   }
-    };
   }
-  
-  
+
+  form: FormGroup = inject(FormBuilder).group({
+    _id: ['', Validators.required],
+    title: ['', Validators.required],
+    description: ['', Validators.required],
+    points: [0, [Validators.required, Validators.min(0)]]
+  });
+}
